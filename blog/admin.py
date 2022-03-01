@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Post, Comment
+from django_summernote.admin import SummernoteModelAdmin
+from .models import Post, Image
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -9,7 +11,7 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-admin.site.register(Post, PostAdmin)
+admin.site.register(Post, PostAdmin,)
 
 
 @admin.register(Comment)
@@ -21,3 +23,11 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
+
+
+class PostAdmin(SummernoteModelAdmin):
+    summernote_fields = ('content',)
+
+
+class SomeModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
+    summernote_fields = '__all__'

@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django import forms
 
 STATUS = (
     (0, "Draft"),
@@ -36,3 +37,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("post_detail", kwargs={"slug": str(self.slug)})
+
+
+class Image(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+
+    def __str__(self):
+        return self.title

@@ -2,6 +2,7 @@ from django.views import generic
 from .models import Post
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404, HttpResponse
+from .forms import ImageForm
 
 
 class PostList(generic.ListView):
@@ -36,4 +37,22 @@ def post_detail(request, slug):
 def about(request):
     return HttpResponse("<h1>This is about page</h1>")
 
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'maini.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'maini.html', {'form': form})
+
+
 # return render(request, "about.html")
+
+def Contact(request):
+    return render(request, 'Contact.html')
