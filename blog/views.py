@@ -56,3 +56,7 @@ def image_upload_view(request):
 
 def Contact(request):
     return render(request, 'Contact.html')
+
+
+def Home(request):
+    return render(request, 'home.html')

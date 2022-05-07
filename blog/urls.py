@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path
-from .views import about, Contact
+from .views import about, Contact, Home
 from .feeds import LatestPostsFeed
 from django.conf import settings
 from django.conf.urls.static import static
@@ -12,7 +12,8 @@ urlpatterns = [
     path(' ', about, name='about'),
     path("feed/rss", LatestPostsFeed(), name='post_feed'),
     path('admin/upload', views.image_upload_view, name='upload_view'),
-    path('<slug:slug>/', Contact, name='Contact'),
+    path('contact/', Contact, name='Contact'),
+    path('home/', Home, name='home'),
 ]
 
 if settings.DEBUG:

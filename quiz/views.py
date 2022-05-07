@@ -39,7 +39,7 @@ def home(request):
         context = {
             'questions': questions
         }
-        return render(request, 'Home.html', context)
+        return render(request, 'home.html', context)
 
 
 def addQuestion(request):
@@ -90,3 +90,7 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('/')
+
+
+def index(request):
+    return render(request, 'index.html')
