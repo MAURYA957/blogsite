@@ -1,3 +1,5 @@
+import view as view
+from . import views
 from django.contrib import admin
 from django.urls import path
 from quiz.views import *
@@ -13,6 +15,7 @@ urlpatterns = [
     path('logout/', logoutPage, name='logout'),
     path('register/', registerPage, name='register'),
     path('index/', index, name='index'),
+    path('main/', main, name='main'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

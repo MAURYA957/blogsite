@@ -3,12 +3,16 @@ from .models import Post
 from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from .forms import ImageForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import render, redirect
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.template.loader import render_to_string
 
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
-
 
 def post_detail(request, slug):
     template_name = 'post_detail.html'

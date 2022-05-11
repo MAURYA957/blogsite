@@ -43,23 +43,21 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                      <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Home</a>
+                         <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">AboutUs</a>
+                         <a class="nav-link text-black font-weight-bold" href="{% url 'main' %}">Main</a>
                         </li>
-                        <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="{% url 'home' %}">Contact</a>
+                       <li class="nav-item">
+                        <a class="greet" href="{% url 'login' %}">Login</a>
                         </li>
-                         <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">Gyan</a>
-                        </li>
-                        <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">Policy</a>
-                        </li> -->
                     </ul>
                 </div>
             </div>
+                {% if user.is_authenticated %}
+                    <span class="greet">Welcome, {{request.user}}</span>
+                    <span><a class="greet" href="{% url 'logout' %}">Logout</a></span>
+                {% endif %}
         </nav>
         {% block content %}
         <!-- Content Goes here -->

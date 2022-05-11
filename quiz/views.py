@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from .forms import *
 from .models import *
-from django.http import HttpResponse
+from django.views import generic
 
 
 # Create your views here.
@@ -74,7 +74,10 @@ def registerPage(request):
 
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        if request.user.is_staff:
+            return render(request, 'staff.html')
+        else:
+            return redirect('home')
     else:
         if request.method == "POST":
             username = request.POST.get('username')
@@ -94,3 +97,16 @@ def logoutPage(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def staff(request):
+    return render(request, 'staff.html')
+
+
+def main(request):
+    return render(request, 'main.html')
+
+
+class PostList(generic.ListView):
+    queryset = Category.objects.filter().order_by('-Createdate')
+    template_name = 'main.html'

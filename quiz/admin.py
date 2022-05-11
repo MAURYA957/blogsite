@@ -3,3 +3,6 @@ from .models import *
 
 # Register your models here.
 admin.site.register(QuesModel)
+admin.site.register(Quiz)
+admin.site.register(SubCategory)
+admin.site.register(Category)
